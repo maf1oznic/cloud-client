@@ -1,1 +1,1 @@
-export const API_URL = `https://cloud-server-5tck.onrender.com/`
+export const API_URL = `http://localhost:5000/`

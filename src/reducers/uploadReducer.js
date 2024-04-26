@@ -10,26 +10,28 @@ const defaultState = {
     files: []
 }
 
-export default function userReducer(state = defaultState, action) {
+export default function uploadReducer(state = defaultState, action) {
     switch (action.type) {
-        case SHOW_UPLOADER: return {...state, isVisible: true}
-        case HIDE_UPLOADER: return {...state, isVisible: false}
+        case SHOW_UPLOADER:
+            return { ...state, isVisible: true };
+        case HIDE_UPLOADER:
+            return { ...state, isVisible: false };
         case ADD_UPLOAD_FILE:
-            return {...state, files: [...state.files, action.payload]}
+            return { ...state, files: [action.payload, ...state.files] }; // Добавляем новый файл в начало массива
         case REMOVE_UPLOAD_FILE:
-            return {...state, files: [...state.files.filter(file => file.id != action.payload)]}
+            return { ...state, files: state.files.filter(file => file.id !== action.payload) };
         case CHANGE_UPLOAD_FILE:
             return {
                 ...state,
-                files: [...state.files.map(file => file.id == action.payload.id
-                    ? {...file, progress: action.payload.progress}
-                    : {...file}
-                )]
-            }
+                files: state.files.map(file =>
+                    file.id === action.payload.id ? { ...file, progress: action.payload.progress } : file
+                )
+            };
         default:
-            return state
+            return state;
     }
 }
+
 
 
 export const showUploader = () => ({type: SHOW_UPLOADER})
