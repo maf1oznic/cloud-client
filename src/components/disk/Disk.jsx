@@ -7,6 +7,7 @@ import Popup from "./Popup";
 import { setPopupDisplay } from '../../reducers/fileReducer';
 // import {setCurrentDir, setFileView, setPopupDisplay} from "../../reducers/fileReducer";
 // import Uploader from "./uploader/Uploader";
+import DiskSpaceInfo from "./DiskSpaceInfo";
 
 const Disk = () => {
     const dispatch = useDispatch()
@@ -102,6 +103,7 @@ const Disk = () => {
                     </div>
                     <FileList/>
                     <Popup/>
+                    <DiskSpaceInfo/>
                 </div>
             </div>
     );
