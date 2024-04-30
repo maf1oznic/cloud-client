@@ -35,6 +35,14 @@ const File = ({ file }) => {
         dispatch(deleteFile(file));
     }
 
+     function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.getMonth() + 1; // добавляем 1, так как месяцы в JavaScript начинаются с 0
+        const year = date.getFullYear();
+        return `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
+    }
+    
     // if (fileView === 'list') {
     return (
         <div
@@ -69,7 +77,7 @@ const File = ({ file }) => {
                 className="file__img"
             />
             <div className="file__name">{file.name}</div>
-            <div className="file__date">{file.date.slice(0, 10)}</div>
+            <div className="file__date">{formatDate(file.date)}</div>
             <div className="file__size">{sizeFormat(file.size)}</div>
             <button
                 onClick={(e) => downloadClickHandler(e)}
