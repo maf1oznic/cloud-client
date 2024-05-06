@@ -7,17 +7,17 @@ import {API_URL} from "../config";
 export function getFiles(dirId, sort) {
     return async dispatch => {
         try {
-            // dispatch(showLoader())
+            dispatch(showLoader())
             let url = `${API_URL}api/files`
-            // if (dirId) {
-            //     url = `${API_URL}api/files?parent=${dirId}`
-            // }
-            // if (sort) {
-            //     url = `${API_URL}api/files?sort=${sort}`
-            // }
-            // if (dirId && sort) {
-            //     url = `${API_URL}api/files?parent=${dirId}&sort=${sort}`
-            // }
+            if (dirId) {
+                url = `${API_URL}api/files?parent=${dirId}`
+            }
+            if (sort) {
+                url = `${API_URL}api/files?sort=${sort}`
+            }
+            if (dirId && sort) {
+                url = `${API_URL}api/files?parent=${dirId}&sort=${sort}`
+            }
             const response = await axios.get(url, {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
             });
@@ -25,9 +25,9 @@ export function getFiles(dirId, sort) {
         } catch (e) {
             alert(e.response.data.message)
         } 
-        // finally {
-        //     dispatch(hideLoader())
-        // }
+        finally {
+            dispatch(hideLoader())
+        }
     }
 }
 
@@ -111,19 +111,19 @@ export function deleteFile(file) {
     }
 }
 
-// export function searchFiles(search) {
-//     return async dispatch => {
-//         try {
-//             const response = await axios.get(`${API_URL}api/files/search?search=${search}`,{
-//                 headers:{
-//                     Authorization: `Bearer ${localStorage.getItem('token')}`
-//                 }
-//             })
-//             dispatch(setFiles(response.data))
-//         } catch (e) {
-//             alert(e?.response?.data?.message)
-//         } finally {
-//             dispatch(hideLoader())
-//         }
-//     }
-// }
+export function searchFiles(search) {
+    return async dispatch => {
+        try {
+            const response = await axios.get(`${API_URL}api/files/search?search=${search}`,{
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            dispatch(setFiles(response.data))
+        } catch (e) {
+            alert(e?.response?.data?.message)
+        } finally {
+            dispatch(hideLoader())
+        }
+    }
+}

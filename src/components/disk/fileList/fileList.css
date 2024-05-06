@@ -16,6 +16,12 @@
     grid-column-start: 6;
     justify-self: center;
 }
+.noFiles {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+}
 /* .fileplate {
     display: flex;
     flex-wrap: wrap;
